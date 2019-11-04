@@ -19,7 +19,7 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
         super.viewDidLoad()
         
         // create a new scene
-        let scene = GameScene()
+//        let scene = GameScene()
 
         // retrieve the SCNView
         let scnView = self.view as! SCNView
@@ -27,6 +27,8 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
         // set the scene to the view
         scnView.scene = scene
         scnView.pointOfView?.position = SCNVector3Make(0, 0, 100)
+        scnView.loops = true
+        scnView.isPlaying = true
 
         // allows the user to manipulate the camera
         scnView.allowsCameraControl = true
@@ -36,6 +38,7 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
 
         // configure the view
          scnView.backgroundColor = UIColor.white
+        
           
 
         
@@ -48,16 +51,17 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
         cameraNode.position =  SCNVector3(0, 0, 65)
         
         scnView.delegate = self
+        
     
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         if time > myTime{
-            scene.setUpNextGrid()
-            for node  in self.scene.nodesReferences{
-                node.removeFromParentNode()
-            }
+//            if let sceneProtected =  self.scene {
+//                sceneProtected.rebuild()
+//            }
             scene.rebuild()
+            
             myTime  =  time + targetTIme
         }
     }

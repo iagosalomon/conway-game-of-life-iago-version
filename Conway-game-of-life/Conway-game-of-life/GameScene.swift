@@ -60,7 +60,11 @@ class GameScene: SCNScene {
     }
     
     func rebuild() {
+        setUpNextGrid()
         grid.updateGrid()
+        rootNode.enumerateChildNodes { (node, stop) in
+            node.removeFromParentNode()
+        }
         let geometry = SCNBox(width: 0.6 , height: 0.6,
                               length: 0.1, chamferRadius: 0.005)
         geometry.firstMaterial?.diffuse.contents = UIColor.red
