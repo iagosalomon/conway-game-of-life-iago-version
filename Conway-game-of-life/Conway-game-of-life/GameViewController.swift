@@ -37,7 +37,7 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
         scnView.showsStatistics = true
 
         // configure the view
-         scnView.backgroundColor = UIColor.white
+         scnView.backgroundColor = UIColor.black
         
           
 
@@ -67,7 +67,7 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
     }
         
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
     
     override var prefersStatusBarHidden: Bool {
