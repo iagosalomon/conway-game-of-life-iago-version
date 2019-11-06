@@ -28,7 +28,7 @@ class Manager {
             }
             
         }
-    
+            
         else {
             if neighbours == 3{
                 grid.newGrid[x][y].revive()
@@ -47,7 +47,7 @@ class Manager {
                         if x +  i == x && y + j == y{
                             sum -= 1
                         }
-                        
+
                         sum  += 1
                     }
                     

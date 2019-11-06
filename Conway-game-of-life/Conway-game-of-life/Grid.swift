@@ -24,7 +24,7 @@ class Grid {
         for _ in 0 ... row{
             var acc: [Cell] = []
             for _  in 0 ... colum{
-                let i = Int.random(in: 0...10)
+                let i = Int.random(in: 0...20)
                 let cell = Cell()
                 if i  < 2{
                     cell.revive()

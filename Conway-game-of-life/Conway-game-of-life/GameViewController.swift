@@ -51,18 +51,20 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
         cameraNode.position =  SCNVector3(0, 0, 65)
         
         scnView.delegate = self
-        
+        setupLight(rootNode: scene.rootNode)
     
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         if time > myTime{
 //            if let sceneProtected =  self.scene {
-//                sceneProtected.rebuild()
+//                sceneProtected.rebuild()s
 //            }
             scene.rebuild()
+            scene.rebuild2()
             
             myTime  =  time + targetTIme
+            
         }
     }
         
@@ -83,6 +85,18 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
     }
     
 
-    
+    func setupLight(rootNode: SCNNode) {
+        let lightNode = SCNNode()
+        lightNode.light = SCNLight()
+        lightNode.light!.type = .omni
+        lightNode.position = SCNVector3(x: 0, y: -100, z: -100)
+        rootNode.addChildNode(lightNode)
+
+        let ambientLightNode = SCNNode()
+        ambientLightNode.light = SCNLight()
+        ambientLightNode.light!.type = .ambient
+        ambientLightNode.light!.color = UIColor.gray
+        rootNode.addChildNode(ambientLightNode)
+    }
 
 }
