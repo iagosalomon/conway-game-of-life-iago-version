@@ -9,12 +9,14 @@
 import UIKit
 import QuartzCore
 import SceneKit
+import ARKit
 
-class GameViewController: UIViewController , SCNSceneRendererDelegate{
+class GameViewController: UIViewController , SCNSceneRendererDelegate,  ARSCNViewDelegate{
     var myTime: TimeInterval = 0
     var scene: GameScene = GameScene()
     var targetTIme: TimeInterval = 0.5
-
+    @IBOutlet weak var viewOutlet: ARSCNView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,22 +24,21 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
 //        let scene = GameScene()
 
         // retrieve the SCNView
-        let scnView = self.view as! SCNView
 
         // set the scene to the view
-        scnView.scene = scene
-        scnView.pointOfView?.position = SCNVector3Make(0, 0, 100)
-        scnView.loops = true
-        scnView.isPlaying = true
+        viewOutlet.scene = scene
+        viewOutlet.pointOfView?.position = SCNVector3Make(0, 0, 100)
+        viewOutlet.loops = true
+        viewOutlet.isPlaying = true
 
         // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
+        viewOutlet.allowsCameraControl = false
 
         // show statistics such as fps and timing information
-        scnView.showsStatistics = true
+        viewOutlet.showsStatistics = true
 
         // configure the view
-         scnView.backgroundColor = UIColor.black
+         viewOutlet.backgroundColor = UIColor.black
         
           
 
@@ -50,9 +51,26 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
         //position
         cameraNode.position =  SCNVector3(0, 0, 65)
         
-        scnView.delegate = self
+        viewOutlet.delegate = self
         setupLight(rootNode: scene.rootNode)
     
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Create a session configuration
+        let configuration = ARWorldTrackingConfiguration()
+
+        // Run the view's session
+        viewOutlet.session.run(configuration)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Pause the view's session
+        viewOutlet.session.pause()
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {

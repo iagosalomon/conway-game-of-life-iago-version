@@ -109,8 +109,8 @@ class GameScene: SCNScene {
                 
                 let boxCopy = boxnode.copy() as! SCNNode
                 //                boxCopy.geometry?.materials.first?.diffuse.contents  = generateRandomColor()
-                boxCopy.position.x = Float(xIndex - offset)
-                boxCopy.position.y = Float(yIndex - offset)
+                boxCopy.position.x = Float(xIndex - offset + 200)
+                boxCopy.position.y = Float(yIndex - offset + 200)
                 boxCopy.position.z = Float(0.6 * level * -1)
                 if grid.grid[xIndex][yIndex].isAlive(){
                     self.rootNode.addChildNode(boxCopy)
