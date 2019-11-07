@@ -35,10 +35,14 @@ class Manager {
     }
     static func calcularNeighbours(grid: Grid, x: Int  , y: Int) -> Int{
         var sum :Int = 0
-        for i in -1 ... 2{
-            for j in -1 ... 2{
-                if x  + i >= 0 && x  + i  < grid.x  && y  + j >= 0 && y  + j < grid.y {
+        for i in -1 ... 1{
+            for j in -1 ... 1{
+                if x  + i >= 0 && x  + i  < grid.x + 1   && y  + j >= 0 && y  + j < grid.y + 1  {
                     if grid.grid[x  + i][y  + j].isAlive(){
+                        if x +  i == x && y + j == y{
+                            sum -= 1
+                        }
+
                         sum  += 1
                     }
                     
