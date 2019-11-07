@@ -54,7 +54,6 @@ class Manager {
                 }
             }
         }
-        print(sum)
         return sum
     }
 }
