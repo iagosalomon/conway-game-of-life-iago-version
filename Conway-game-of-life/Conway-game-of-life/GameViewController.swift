@@ -61,7 +61,7 @@ class GameViewController: UIViewController , SCNSceneRendererDelegate{
 //                sceneProtected.rebuild()
 //            }
             scene.rebuild()
-            
+            scene.rebuild2()
             myTime  =  time + targetTIme
         }
     }

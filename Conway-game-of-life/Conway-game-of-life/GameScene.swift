@@ -69,7 +69,6 @@ class GameScene: SCNScene {
         geometry.firstMaterial?.emission.contents = UIColor.blue
         let boxnode = SCNNode(geometry: geometry)
         boxnode.geometry?.firstMaterial?.diffuse.contents = generateRandomColor()
-        let letsplay = Int.random(in: 0...16)
         let offset: Int = 16
         // era 16
         
@@ -88,6 +87,37 @@ class GameScene: SCNScene {
             }
         }
     }
+    func rebuild2() {
+        level += 1
+        grid.setUpNextGrid()
+        //        rootNode.enumerateChildNodes { (node, stop) in
+        //            node.removeFromParentNode()
+        //        }
+        let geometry = boxDemensions
+        geometry.firstMaterial?.diffuse.contents = UIColor.blue
+        geometry.firstMaterial?.specular.contents = UIColor.white
+        geometry.firstMaterial?.emission.contents = UIColor.blue
+        let boxnode = SCNNode(geometry: geometry)
+        boxnode.geometry?.firstMaterial?.diffuse.contents = generateRandomColor()
+        let offset: Int = Int.random(in: 0...16)
+        // era 16
+        
+        for xIndex:Int in 0...rowNumbers {
+            for yIndex:Int in 0...columNumbers {
+                
+                let boxCopy = boxnode.copy() as! SCNNode
+                //                boxCopy.geometry?.materials.first?.diffuse.contents  = generateRandomColor()
+                boxCopy.position.x = Float(xIndex - offset)
+                boxCopy.position.y = Float(yIndex - offset)
+                boxCopy.position.z = Float(0.6 * level * -1)
+                if grid.grid[xIndex][yIndex].isAlive(){
+                    self.rootNode.addChildNode(boxCopy)
+                }
+                
+            }
+        }
+    }
+    
     
     func generateRandomColor() -> UIColor {
       let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
